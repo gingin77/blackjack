@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+require 'pry'
+
+# To run this from the blackjack parent directory, use:  ./bin/blackjack_app
+
+require_relative '../lib/game'
+# require_relative '../lib/deck'
+# require_relative '../lib/dealer'
+# require_relative '../lib/card'
+# require_relative '../lib/hand'
+# require_relative '../lib/player'
+
+game = Game.new(response, hand: 1)
+game.get_hit_or_stand
+
+
+# print "Do you want to (h)it or (s)tand?  "
+# @response = gets.chomp.downcase
+#
+# print "Because you said #{@response}, the dealer will now give you a new card."
