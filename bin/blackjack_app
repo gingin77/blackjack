@@ -8,10 +8,10 @@ require_relative '../lib/game'
 # require_relative '../lib/dealer'
 # require_relative '../lib/card'
 # require_relative '../lib/hand'
-# require_relative '../lib/player'
+require_relative '../lib/player'
 
-game = Game.new(response, hand: 1)
-game.get_hit_or_stand
+game = Game.new
+# game.get_hit_or_stand
 
 
 # print "Do you want to (h)it or (s)tand?  "
