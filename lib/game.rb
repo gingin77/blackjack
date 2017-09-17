@@ -4,22 +4,17 @@ class Game
   attr_accessor :player
 
   def initialize
+    puts "Welcome to the Blackjack Table\n\n"
     @player = Player.new
-    puts "Playing Blackjack...\n\n"
-
     @response = player.hit_or_stand
-    # ? "true" : "false"
-    puts "The response is "
     dealer_deals
   end
 
   def dealer_deals
-    puts "the dealer doesn't know what to do yet"
-      if @response == true
-        print "The dealer will now give you a new card. \n\n"
-      elsif @response == false
-        print "You decided to stand. \n\n"
-      # end
+    if @response == true
+      print "The dealer will now give you a new card. \n\n"
+    elsif @response == false
+      print "You decided to stand. \n\n"
     end
   end
 end
