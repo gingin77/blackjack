@@ -6,10 +6,3 @@ require 'pry'
 require_relative '../lib/game'
 
 game = Game.new
-
-
-
-# print "Do you want to (h)it or (s)tand?  "
-# @response = gets.chomp.downcase
-#
-# print "Because you said #{@response}, the dealer will now give you a new card."
