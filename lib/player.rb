@@ -2,7 +2,8 @@ require "pry"
 
 class Player
   def initialize
-    @response = hit_or_stand
+    @bet = 10
+    @money = 100
   end
 
   def hit_or_stand
