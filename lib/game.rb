@@ -15,9 +15,7 @@ class Game
   def start_game
     start_display
     Hand.new(@dealer.two_to_player, @dealer.two_to_dealer)
-    # Hand.concatenate
     @player.hit_or_stand
-    # binding.pry
   end
 
   def start_display
