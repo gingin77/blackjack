@@ -11,7 +11,8 @@ class Deck
   def initialize
     @card_deck = create_deck
     # @card_deck
-    puts @card_deck
+    # puts @card_deck
+    # binding.pry
   end
 
   def create_deck

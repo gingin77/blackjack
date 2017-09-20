@@ -7,8 +7,8 @@ class Game
   attr_accessor :dealer, :player, :deck
 
   def initialize
-    @deck = Deck.new
-    # @dealer = Dealer.new
+    # @deck = Deck.new
+    @dealer = Dealer.new
     # @player = Player.new
   end
 
