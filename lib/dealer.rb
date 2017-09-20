@@ -1,28 +1,25 @@
 require_relative 'deck'
-require "pry"
+require 'pry'
 
 class Dealer
-  attr_accessor :shuffled_deck
+  attr_reader :shuffled_deck, :two_to_player, :two_to_dealer
 
   def initialize
     @shuffled_deck = Deck.new.create_deck
-    first_deal_to_player
-    first_deal_to_dealer
+    @two_to_player = deal_two_cards
+    @two_to_dealer = deal_two_cards
   end
 
-  def first_deal_to_player
+  def deal_two_cards
     @shuffled_deck.pop(2)
   end
 
-  def first_deal_to_dealer
-    @shuffled_deck.pop(2)
+  def deals?
+    # If player.response == true, deal_one_card
+    # # If dealers_hand > ?? (set criteria), deal_one_card
   end
 
-  def single_to_player
-    @shuffled_deck.pop(1)
-  end
-
-  def single_to_dealer
+  def deal_one_card
     @shuffled_deck.pop(1)
   end
 

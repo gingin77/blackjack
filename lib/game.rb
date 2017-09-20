@@ -14,8 +14,9 @@ class Game
 
   def start_game
     start_display
-    Hand.new(@dealer.first_deal_to_player, @dealer.first_deal_to_dealer)
+    Hand.new(@dealer.two_to_player, @dealer.two_to_dealer)
     @player.hit_or_stand
+    # binding.pry
   end
 
   def start_display
