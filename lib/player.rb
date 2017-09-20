@@ -1,6 +1,10 @@
 require "pry"
 
 class Player
+  def initialize
+    @response = hit_or_stand
+  end
+
   def hit_or_stand
     while true
       print "Do you want to hit or stand? Enter (h) or (s).  "
