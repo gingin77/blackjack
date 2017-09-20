@@ -15,6 +15,7 @@ class Game
   def start_game
     start_display
     Hand.new(@dealer.two_to_player, @dealer.two_to_dealer)
+    # Hand.concatenate
     @player.hit_or_stand
     # binding.pry
   end
@@ -23,7 +24,7 @@ class Game
     print "
     Hello and welcome to the game of blackjack!
 
-    Let's begin. You have $100 and bet $10.
+    Let's begin. You have $100 and each bet is $10.
 
     "
   end
