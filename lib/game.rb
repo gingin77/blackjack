@@ -22,7 +22,9 @@ class Game
     print "
     Hello and welcome to the game of blackjack!
 
-    Let's begin. You have $100 and each bet is $10.
+    Let's begin. You have $100 and you have to bet $10 on each hand.
+
+    Aces are worth 1 or 11 and will be evaluated in your favor.
 
     "
   end
