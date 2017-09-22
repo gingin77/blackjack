@@ -2,18 +2,18 @@ require "minitest/autorun"
 require_relative "../lib/game"
 
 class GameTest < Minitest::Test
-  def game_setup
-    # skip
-    @ng = Game.new
-    @blackjack_hand = [Card.new(:Ace, :clubs), Card.new(:King, :clubs)]
-    @two_nums = [Card.new(8, :clubs), Card.new(9, :clubs)]
-  end
-
-  def test_start_display
-    skip
-    # assert_equal @ng.start_game( @one_ace ), 21
-    # incomplete
-  end
+  # def game_setup
+  #   # skip
+  #   @ng = Game.new
+  #   @blackjack_hand = [Card.new(:Ace, :clubs), Card.new(:King, :clubs)]
+  #   @two_nums = [Card.new(8, :clubs), Card.new(9, :clubs)]
+  # end
+  #
+  # def test_start_display
+  #   skip
+  #   # assert_equal @ng.start_game( @one_ace ), 21
+  #   # incomplete
+  # end
 end
 
 # Refer to commit from Friday, Sept 22nd
