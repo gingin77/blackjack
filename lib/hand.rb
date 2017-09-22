@@ -35,13 +35,13 @@ class Hand
     if convert_to_i_and_sum(hand) == 21
       "Congratulations, you have blackjack!"
     elsif convert_to_i_and_sum(hand) < 21
-      convert_to_i_and_sum(hand)
+      "Your hand is worth #{ convert_to_i_and_sum(hand) } points."
     elsif convert_to_i_and_sum(hand) > 21
       # check_for_aces
       if hand_to_ranks(hand).count(:Ace) >= 1
-        convert_to_i_and_sum(hand) - 10
+        "Your hand is worth #{ convert_to_i_and_sum(hand) - 10 } points."
       else
-        convert_to_i_and_sum(hand)
+        "Your hand is worth #{ convert_to_i_and_sum(hand) } points. You bust!"
       end
     end
   end
@@ -53,12 +53,13 @@ class Hand
   #     "Your hand is worth #{ convert_to_i_and_sum(hand) } points."
   #   elsif convert_to_i_and_sum(hand) > 21
   #     # check_for_aces
-  #     if hand_to_ranks(hand).count(aces) >= 1
+  #     if hand_to_ranks(hand).count(:Aces) >= 1
   #       "Your hand is worth #{ convert_to_i_and_sum(hand) - 10 } points."
   #     else
   #       "Your hand is worth #{ convert_to_i_and_sum(hand) } points. You bust!"
   #     end
   #   end
+  #   # binding.pry
   # end
 
   def compare_player_to_dealer

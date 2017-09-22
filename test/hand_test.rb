@@ -24,12 +24,20 @@ class HandTest < Minitest::Test
   end
 
   def test_ace_to_one
-    assert_equal @hand.point_evalulator( @one_ace_one_three_one_face ), 14
+    assert_equal @hand.point_evalulator( @one_ace_one_three_one_face ), "Your hand is worth 14 points."
   end
 
   def test_bust
     # skip
-    assert_equal @hand.point_evalulator( @one_jack_one_three_one_jack ), 23
+    assert_equal @hand.point_evalulator( @one_jack_one_three_one_jack ), "Your hand is worth 23 points. You bust!"
+  end
+
+  def test_not_a_bust
+    # skip
+    assert_equal @hand.point_evalulator( @one_ace ), "Congratulations, you have blackjack!"
+
+    assert_equal @hand.point_evalulator( @one_face_one_ace_nine ), "Your hand is worth 20 points."
+
   end
 
   def test_player_vs_dealer
