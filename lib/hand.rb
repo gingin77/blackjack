@@ -10,6 +10,7 @@ class Hand
     @players_hand = hand1
     @dealers_hand = hand2
     score_status(@players_hand, @dealers_hand)
+    # binding.pry
   end
 
   def hand_to_ranks(hand)
@@ -48,8 +49,8 @@ class Hand
 
   def compare_player_to_dealer
     puts "compare_player_to_dealer method called"
-    # point_evalulator(@players_hand)
-    # binding.pry
+    print point_evalulator(@players_hand)
+    binding.pry
   end
 
   # def count_aces(hand)
@@ -70,11 +71,16 @@ class Hand
   end
 
   def score_status(players_hand, dealers_hand)
-    print "You have" + show_two_cards(players_hand) + ". " + point_evalulator(players_hand) +
-    "
-    The dealer has one card face down is showing "  + show_one_card(dealers_hand) + ".
+    if players_hand.length == 2
+      print "You have" + show_two_cards(players_hand) + ". " + point_evalulator(players_hand) +
+      "
+      The dealer has one card face down is showing "  + show_one_card(dealers_hand) + ".
 
-    "
+      "
+    elsif players_hand.length > 2
+      print "
+      You now have  a new card!
+      "
+    end
   end
-
 end

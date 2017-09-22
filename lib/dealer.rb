@@ -20,9 +20,11 @@ class Dealer
   # end
 
   def deal_one_card_to_player
+    # puts "the deal_one_card method was called"
     hand_array = @two_to_player + @shuffled_deck.pop(1)
-    puts "the deal_one_card method was called"
+    new_card_hand = Hand.new(hand_array, @two_to_dealer)
     # the new card is added to the end of the array
+    # binding.pry
   end
 
   # def puts_hands
