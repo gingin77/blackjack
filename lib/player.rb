@@ -20,6 +20,20 @@ class Player
     end
   end
 
+  def new_hand
+    while true
+      print "Do you want to play another hand? Enter (y) or (n).  "
+      response = gets.chomp.downcase
+      if response == "y"
+        return true
+      elsif response == "n"
+        return false
+      end
+      puts "That is not a valid response!"
+      response
+    end
+  end
+
   def lose_bet
     @money - @bet
   end

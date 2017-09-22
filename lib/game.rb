@@ -23,10 +23,22 @@ class Game
       else
         @dealer.deal_one_card_to_player
       end
+      play_new_hand?
     else
       print "Congratulations, you have blackjack!
       "
-    # continue_with_hand? this method hasn't yet been written....
+      play_new_hand?
+    end
+  end
+
+  def play_new_hand?
+    if @player.new_hand == true
+      print "Great!"
+      self.start_game
+      # continue_with_hand? this method hasn't yet been written....
+    else
+      print "Thanks for playing!
+      "
     end
   end
 
