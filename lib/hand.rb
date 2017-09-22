@@ -32,25 +32,6 @@ class Hand
     new_array.sum
   end
 
-  def point_evalulator(hand)
-    if convert_to_i_and_sum(hand) == 21
-      "Congratulations, you have blackjack!
-      "
-    elsif convert_to_i_and_sum(hand) < 21
-      "Your hand is worth #{ convert_to_i_and_sum(hand) } points.
-      "
-    elsif convert_to_i_and_sum(hand) > 21
-      # check_for_aces
-      if hand_to_ranks(hand).count(:Ace) >= 1
-        "Your hand is worth #{ convert_to_i_and_sum(hand) - 10 } points.
-        "
-      else
-        "Your hand is worth #{ convert_to_i_and_sum(hand) } points. You bust!
-        "
-      end
-    end
-  end
-
   def point_evalulator_to_i(hand)
     if convert_to_i_and_sum(hand) == 21
       21
@@ -66,7 +47,25 @@ class Hand
     end
   end
 
-
+  def point_evalulator_mess(hand)
+    if convert_to_i_and_sum(hand) == 21
+      "Congratulations, you have blackjack!
+      "
+      # return false
+    elsif convert_to_i_and_sum(hand) < 21
+      "Your hand is worth #{ convert_to_i_and_sum(hand) } points.
+      "
+    elsif convert_to_i_and_sum(hand) > 21
+      # check_for_aces
+      if hand_to_ranks(hand).count(:Ace) >= 1
+        "Your hand is worth #{ convert_to_i_and_sum(hand) - 10 } points.
+        "
+      else
+        "Your hand is worth #{ convert_to_i_and_sum(hand) } points. You bust!
+        "
+      end
+    end
+  end
 
   def compare_player_to_dealer
     # puts "compare_player_to_dealer method called"
@@ -82,27 +81,17 @@ class Hand
       "
     elsif point_evalulator_to_i(@players_hand) < 21 && point_evalulator_to_i(dealers_hand) < 21
       if point_evalulator_to_i(@players_hand) > point_evalulator_to_i(dealers_hand)
-        "Your hand beat the dealer's hand, so you win $10 on this hand!
-        "
+      "Your hand beat the dealer's hand, so you win $10 on this hand!
+      "
       elsif point_evalulator_to_i(@players_hand) == point_evalulator_to_i(dealers_hand)
-        "You tied the dealer. No money gained or lost.
-        "
+      "You tied the dealer. No money gained or lost.
+      "
       elsif point_evalulator_to_i(@players_hand) < point_evalulator_to_i(dealers_hand)
-        "Your hand lost to the dealer. You lose $10 on this hand.
-        "
+      "Your hand lost to the dealer. You lose $10 on this hand.
+      "
       end
     end
-    # binding.pry
   end
-
-  # def count_aces(hand)
-  #   if hand_get_ranks(hand).count(:Ace) == 0
-  #     score_non_aces(hand)
-  #   elsif hand_get_ranks(hand).count(:Ace) >= 1
-  #     ace_handler(hand)
-  #     score_non_aces(hand.select { |card| card != :Ace})
-  #   end
-  # end
 
   def show_three_cards(hand)
     " a #{hand[0].rank} of #{hand[0].suit}, a #{hand[1].rank} of #{hand[1].suit}, and a #{hand[2].rank} of #{hand[2].suit}"
@@ -118,14 +107,16 @@ class Hand
 
   def score_status(players_hand, dealers_hand)
     if players_hand.length == 2
-      print "You have" + show_two_cards(players_hand) + ". " + point_evalulator(players_hand) +
-      "The dealer has one card face down is showing "  + show_one_card(dealers_hand) + ".
+    print "
+    You have" + show_two_cards(players_hand) + ". " + point_evalulator_mess(players_hand) +
+    "
+    The dealer has one card face down is showing "  + show_one_card(dealers_hand) + ".
 
-      "
+    "
     elsif players_hand.length > 2
-      print "
-      You now have" + show_three_cards(players_hand) + ". " + point_evalulator(players_hand) + "
-      "
+    print "
+    You now have" + show_three_cards(players_hand) + ". " + point_evalulator_mess(players_hand) + "
+    "
     end
   end
 end
