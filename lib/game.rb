@@ -14,16 +14,20 @@ class Game
 
   def start_game
     start_display
-    hand = Hand.new(@dealer.two_to_player, @dealer.two_to_dealer)
-    if @player.hit_or_stand == false
-      # I have a blackjack? method in the hand class that needs to be called here and used to cancel the question to the player.
-      print "
-      " + hand.compare_player_to_dealer + "
-      "
+    hands = Hand.new(@dealer.two_to_player, @dealer.two_to_dealer)
+    if hands.blackjack?(hands.players_hand) != true
+      if @player.hit_or_stand == false
+        print "
+        " + hands.compare_player_to_dealer + "
+        "
+      else
+        @dealer.deal_one_card_to_player
+      end
     else
-      @dealer.deal_one_card_to_player
-    end
+      print "Congratulations, you have blackjack!
+      "
     # continue_with_hand? this method hasn't yet been written....
+    end
   end
 
   def start_display
@@ -42,6 +46,6 @@ class Game
   end
 
   def end_game?
-    # Incomplete
+    false
   end
 end
