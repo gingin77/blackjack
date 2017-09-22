@@ -47,6 +47,10 @@ class Hand
     end
   end
 
+  def blackjack?(hand)
+    true if convert_to_i_and_sum(hand) == 21
+  end
+  
   def point_evalulator(hand)
     if convert_to_i_and_sum(hand) == 21
       "Congratulations, you have blackjack!"

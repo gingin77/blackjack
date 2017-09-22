@@ -15,18 +15,15 @@ class Game
   def start_game
     start_display
     hand = Hand.new(@dealer.two_to_player, @dealer.two_to_dealer)
-    if hand.point_evalulator_mess(hand.players_hand) != false && @player.hit_or_stand == false
+    if @player.hit_or_stand == false
+      # I have a blackjack? method in the hand class that needs to be called here and used to cancel the question to the player.
       print "
       " + hand.compare_player_to_dealer + "
       "
     else
       @dealer.deal_one_card_to_player
     end
-    continue_with_hand?
-  end
-
-  def continue_with_hand?
-    # end_game?
+    # continue_with_hand? this method hasn't yet been written....
   end
 
   def start_display
@@ -38,5 +35,13 @@ class Game
     Aces are worth 1 or 11 and will be evaluated in your favor.
 
     "
+  end
+
+  def continue_with_hand?
+    # I still need to figure out how to incorporate bets and end the game.
+  end
+
+  def end_game?
+    # Incomplete
   end
 end
