@@ -10,7 +10,6 @@ class Hand
     @players_hand = hand1
     @dealers_hand = hand2
     score_status(@players_hand, @dealers_hand)
-    # binding.pry
   end
 
   def hand_to_ranks(hand)
