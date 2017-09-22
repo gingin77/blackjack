@@ -19,4 +19,12 @@ class Player
       response
     end
   end
+
+  def lose_bet
+    @money - @bet
+  end
+
+  def add_money
+    @money + @bet
+  end
 end
