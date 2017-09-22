@@ -16,7 +16,8 @@ class Game
     start_display
     hand = Hand.new(@dealer.two_to_player, @dealer.two_to_dealer)
     if @player.hit_or_stand == false
-      hand.compare_player_to_dealer
+      print hand.compare_player_to_dealer + "
+      "
     else
       @dealer.deal_one_card_to_player
     end
