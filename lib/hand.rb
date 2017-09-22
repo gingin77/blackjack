@@ -46,6 +46,12 @@ class Hand
     end
   end
 
+  def compare_player_to_dealer
+    puts "compare_player_to_dealer method called"
+    # point_evalulator(@players_hand)
+    # binding.pry
+  end
+
   # def count_aces(hand)
   #   if hand_get_ranks(hand).count(:Ace) == 0
   #     score_non_aces(hand)

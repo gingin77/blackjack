@@ -18,6 +18,5 @@ class Player
       puts "That is not a valid response!"
       response
     end
-    binding.pry
   end
 end

@@ -14,13 +14,15 @@ class Dealer
     @shuffled_deck.pop(2)
   end
 
-  def deals?
-    # If player.response == true, deal_one_card
-    # # If dealers_hand > ?? (set criteria), deal_one_card
-  end
+  # def deals?
+  #   # If player.response == true, deal_one_card
+  #   # # If dealers_hand > ?? (set criteria), deal_one_card
+  # end
 
-  def deal_one_card
-    @shuffled_deck.pop(1)
+  def deal_one_card_to_player
+    hand_array = @two_to_player + @shuffled_deck.pop(1)
+    puts "the deal_one_card method was called"
+    # the new card is added to the end of the array
   end
 
   # def puts_hands

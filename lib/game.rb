@@ -14,8 +14,12 @@ class Game
 
   def start_game
     start_display
-    Hand.new(@dealer.two_to_player, @dealer.two_to_dealer)
-    @player.hit_or_stand
+    hand = Hand.new(@dealer.two_to_player, @dealer.two_to_dealer)
+      if @player.hit_or_stand == false
+        hand.compare_player_to_dealer
+      else
+        @dealer.deal_one_card_to_player
+    end
   end
 
   def start_display
