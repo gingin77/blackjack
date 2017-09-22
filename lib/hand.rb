@@ -47,22 +47,18 @@ class Hand
     end
   end
 
-  def point_evalulator_mess(hand)
+  def point_evalulator(hand)
     if convert_to_i_and_sum(hand) == 21
-      "Congratulations, you have blackjack!
-      "
+      "Congratulations, you have blackjack!"
       # return false
     elsif convert_to_i_and_sum(hand) < 21
-      "Your hand is worth #{ convert_to_i_and_sum(hand) } points.
-      "
+      "Your hand is worth #{ convert_to_i_and_sum(hand) } points."
     elsif convert_to_i_and_sum(hand) > 21
       # check_for_aces
       if hand_to_ranks(hand).count(:Ace) >= 1
-        "Your hand is worth #{ convert_to_i_and_sum(hand) - 10 } points.
-        "
+        "Your hand is worth #{ convert_to_i_and_sum(hand) - 10 } points."
       else
-        "Your hand is worth #{ convert_to_i_and_sum(hand) } points. You bust!
-        "
+        "Your hand is worth #{ convert_to_i_and_sum(hand) } points. You bust!"
       end
     end
   end
@@ -108,14 +104,14 @@ class Hand
   def score_status(players_hand, dealers_hand)
     if players_hand.length == 2
     print "
-    You have" + show_two_cards(players_hand) + ". " + point_evalulator_mess(players_hand) +
+    You have" + show_two_cards(players_hand) + ". " + point_evalulator(players_hand) +
     "
     The dealer has one card face down is showing "  + show_one_card(dealers_hand) + ".
 
     "
     elsif players_hand.length > 2
     print "
-    You now have" + show_three_cards(players_hand) + ". " + point_evalulator_mess(players_hand) + "
+    You now have" + show_three_cards(players_hand) + ". " + point_evalulator(players_hand) + "
     "
     end
   end
