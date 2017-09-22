@@ -11,8 +11,12 @@ class HandTest < Minitest::Test
   end
 
   def test_that_ace_equals_eleven
-    skip
-    # assert convert_to_i_and_sum( @hand[0] ) == 21
+    # skip
+    assert_equal @hand.convert_to_i_and_sum( @one_ace ), 21
+  end
+
+  def test_player_vs_dealer
+
   end
   #
   # def test_that_ace_equals_one
