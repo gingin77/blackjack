@@ -9,24 +9,28 @@ class Game
   def initialize
     @dealer = Dealer.new
     @player = Player.new
+    @hands = Hands.new(@dealer)
     start_new_game
   end
 
   def start_new_game
+    binding.pry
     start_display
     start_new_hand
   end
 
   def start_new_hand
-    hands = Hands.new(@dealer)
-    under_21 = hands.under_21(hands.players_hand)
+    # hands = Hands.new(@dealer)
+    under_21 = @hands.under_21(@hands.players_hand)
 
     if under_21 == true
-      hands.score_status(hands.players_hand, hands.dealers_hand)
+      @hands.score_status(@hands.players_hand, @hands.dealers_hand)
+
       # until under_21 != true
       if player.hit_or_stand == true
-        hands.player_accepts_new_card(@dealer.deal_one_card)
-        hands.score_status(hands.players_hand, hands.dealers_hand)
+        # binding.pry
+        @hands.player_accepts_new_card(@dealer.deal_one_card)
+        @hands.score_status(@hands.players_hand, @hands.dealers_hand)
         if under_21 == true
           player.hit_or_stand
         end
@@ -41,7 +45,7 @@ class Game
       print "Your hand is over"
       play_new_hand?
 
-    elsif hands.blackjack?(hands.players_hand) == true
+    elsif @hands.blackjack?(@hands.players_hand) == true
       hand_is_blackjack
     end
     # binding.pry
