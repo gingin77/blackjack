@@ -3,7 +3,7 @@ require_relative "../lib/hand.rb"
 
 class HandTest < Minitest::Test
   def setup
-    @one_ace = [Card.new(:Ace, :clubs), Card.new(:King, :clubs)]
+    @blackjack_hand = [Card.new(:Ace, :clubs), Card.new(:King, :clubs)]
 
     @two_faces_one_ace = [Card.new(:Ace, :clubs), Card.new(:Jack, :diamonds), Card.new(:Queen, :clubs)]
 
@@ -15,12 +15,12 @@ class HandTest < Minitest::Test
 
     @two_faces = [Card.new(8, :clubs), Card.new(9, :clubs)]
 
-    @hand = Hand.new(@one_face_one_ace_nine, @one_ace)
+    @hand = Hand.new(@one_face_one_ace_nine, @blackjack_hand)
   end
 
   def test_that_ace_equals_eleven
     # skip
-    assert_equal @hand.convert_to_i_and_sum( @one_ace ), 21
+    assert_equal @hand.convert_to_i_and_sum( @blackjack_hand ), 21
   end
 
   def test_ace_to_one
@@ -35,7 +35,7 @@ class HandTest < Minitest::Test
 
   def test_not_a_bust
     # skip
-    assert_equal @hand.point_evalulator( @one_ace ), "Congratulations, you have blackjack!"
+    assert_equal @hand.point_evalulator( @blackjack_hand ), "Congratulations, you have blackjack!"
     assert_equal @hand.point_evalulator( @one_face_one_ace_nine ), "Your hand is worth 20 points."
   end
 end

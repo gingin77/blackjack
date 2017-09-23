@@ -11,7 +11,7 @@ class GameTest < Minitest::Test
   #
   # def test_start_display
   #   skip
-  #   # assert_equal @ng.start_game( @one_ace ), 21
+  #   # assert_equal @ng.start_new_game( @one_ace ), 21
   #   # incomplete
   # end
 end

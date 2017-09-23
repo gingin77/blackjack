@@ -1,28 +1,26 @@
 require_relative 'deck'
+require_relative 'hand'
 require 'pry'
 
 class Dealer
-  attr_reader :shuffled_deck, :two_to_player, :two_to_dealer
+  attr_accessor :shuffled_deck
+  # , :two_to_player, :two_to_dealer
 
   def initialize
     @shuffled_deck = Deck.new.create_deck
-    @two_to_player = deal_two_cards
-    @two_to_dealer = deal_two_cards
+    # @two_to_player = deal_two_cards
+    # @two_to_dealer = deal_two_cards
   end
 
   def deal_two_cards
     @shuffled_deck.pop(2)
   end
 
-  # def deals?
-  #   # If player.response == true, deal_one_card
-  #   # # If dealers_hand > ?? (set criteria), deal_one_card
-  # end
-
   def deal_one_card_to_player
+    # binding.pry
     # puts "the deal_one_card method was called"
-    hand_array = @two_to_player + @shuffled_deck.pop(1)
-    Hand.new(hand_array, @two_to_dealer)
+    @shuffled_deck.pop(1)
+    # Hand.new(hand_array, @two_to_dealer)
     # the new card is added to the end of the array
     # binding.pry
   end

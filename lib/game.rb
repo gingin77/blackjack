@@ -9,32 +9,43 @@ class Game
   def initialize
     @dealer = Dealer.new
     @player = Player.new
-    start_game
+    start_new_game
   end
 
-  def start_game
+  def start_new_game
     start_display
-    hands = Hand.new(@dealer.two_to_player, @dealer.two_to_dealer)
-    if hands.blackjack?(hands.players_hand) != true
+    start_new_hand
+  end
+
+  def start_new_hand
+    hands = Hand.new(@dealer)
+    # binding.pry
+    if hands.blackjack?(hands.players_hand) == true
+      hand_is_blackjack
+    else
       if @player.hit_or_stand == false
         print "
         " + hands.compare_player_to_dealer + "
         "
       else
-        @dealer.deal_one_card_to_player
+        hands.player_accepts_new_card(@dealer.deal_one_card_to_player)
+        hands.score_status(hands.players_hand, hands.dealers_hand)
       end
-      play_new_hand?
-    else
-      print "Congratulations, you have blackjack!
-      "
       play_new_hand?
     end
   end
 
+  def hand_is_blackjack
+    print "****** Congratulations, you have blackjack! ******
+    "
+    # bets??
+    play_new_hand?
+  end
+
+
   def play_new_hand?
     if @player.new_hand == true
-      print "Great!"
-      self.start_game
+      start_new_hand
       # continue_with_hand? this method hasn't yet been written....
     else
       print "Thanks for playing!
