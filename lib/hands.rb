@@ -5,23 +5,20 @@ require_relative 'card'
 require_relative 'player'
 require 'pry'
 
-class Hand
+class Hands
   attr_reader :players_hand, :dealers_hand
 
   def initialize(dealer)
-    # binding.pry
     @players_hand = dealer.deal_two_cards
     @dealers_hand = dealer.deal_two_cards
-    score_status(@players_hand, @dealers_hand)
+    # score_status(@players_hand, @dealers_hand)
   end
 
   def player_accepts_new_card(card)
-    # binding.pry
-    @players_hand.push(card)
+    @players_hand = @players_hand + card
   end
 
   def hand_to_ranks(hand)
-    binding.pry
     ranks = []
     hand.each do |card|
       ranks.push card.rank
@@ -46,7 +43,6 @@ class Hand
     elsif convert_to_i_and_sum(hand) < 21
       convert_to_i_and_sum(hand)
     elsif convert_to_i_and_sum(hand) > 21
-      # check_for_aces
       if hand_to_ranks(hand).count(:Ace) >= 1
         convert_to_i_and_sum(hand) - 10
       else
@@ -57,6 +53,10 @@ class Hand
 
   def blackjack?(players_hand)
     convert_to_i_and_sum(players_hand) == 21? true : false
+  end
+
+  def under_21(players_hand)
+    convert_to_i_and_sum(players_hand) < 21? true : false
   end
 
   def point_evalulator(hand)
@@ -76,8 +76,6 @@ class Hand
   end
 
   def compare_player_to_dealer
-    # binding.pry
-    # puts "compare_player_to_dealer method called"
     if point_evalulator_to_i(@players_hand) > 21
       "You lose $10 on this hand.
       "
@@ -105,18 +103,6 @@ class Hand
     end
   end
 
-  def show_three_cards(hand)
-    " a #{hand[0].rank} of #{hand[0].suit}, a #{hand[1].rank} of #{hand[1].suit}, and a #{hand[2].rank} of #{hand[2].suit}"
-  end
-
-  def show_two_cards(hand)
-    " a #{hand[0].rank} of #{hand[0].suit} and a #{hand[1].rank} of #{hand[1].suit}"
-  end
-
-  def show_one_card(hand)
-    " a #{hand[0].rank} of #{hand[0].suit}"
-  end
-
   def score_status(players_hand, dealers_hand)
     # binding.pry
     if players_hand.length == 2 && blackjack?(players_hand) == false
@@ -128,8 +114,21 @@ class Hand
     "
     elsif players_hand.length > 2 && blackjack?(players_hand) == false
     print "
-    You now have" + show_three_cards(players_hand) + ". " + point_evalulator(players_hand) + "
+    You now have" + show_three_cards(players_hand) + ". " + point_evalulator(players_hand) +     "
+
     "
     end
+  end
+
+  def show_three_cards(hand)
+    " a #{hand[0].rank} of #{hand[0].suit}, a #{hand[1].rank} of #{hand[1].suit}, and a #{hand[2].rank} of #{hand[2].suit}"
+  end
+
+  def show_two_cards(hand)
+    " a #{hand[0].rank} of #{hand[0].suit} and a #{hand[1].rank} of #{hand[1].suit}"
+  end
+
+  def show_one_card(hand)
+    " a #{hand[0].rank} of #{hand[0].suit}"
   end
 end

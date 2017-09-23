@@ -1,5 +1,5 @@
 require_relative 'deck'
-require_relative 'hand'
+require_relative 'hands'
 require 'pry'
 
 class Dealer
@@ -16,13 +16,8 @@ class Dealer
     @shuffled_deck.pop(2)
   end
 
-  def deal_one_card_to_player
-    # binding.pry
-    # puts "the deal_one_card method was called"
+  def deal_one_card
     @shuffled_deck.pop(1)
-    # Hand.new(hand_array, @two_to_dealer)
-    # the new card is added to the end of the array
-    # binding.pry
   end
 
   # def puts_hands

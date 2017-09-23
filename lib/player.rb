@@ -14,9 +14,10 @@ class Player
         return true
       elsif response == "s"
         return false
-      end
+      else
       puts "That is not a valid response!"
-      response
+      end
+      # response
     end
   end
 
