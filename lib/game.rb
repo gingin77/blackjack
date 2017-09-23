@@ -1,6 +1,6 @@
 require_relative 'dealer'
 require_relative 'player'
-require_relative 'hand'
+require_relative 'hands'
 require 'pry'
 
 class Game
@@ -9,36 +9,61 @@ class Game
   def initialize
     @dealer = Dealer.new
     @player = Player.new
-    start_game
+    start_new_game
   end
 
-  def start_game
+  def start_new_game
     start_display
-    hands = Hand.new(@dealer.two_to_player, @dealer.two_to_dealer)
-    if hands.blackjack?(hands.players_hand) != true
-      if @player.hit_or_stand == false
+    start_new_hand
+  end
+
+  def start_new_hand
+    hands = Hands.new(@dealer)
+    under_21 = hands.under_21(hands.players_hand)
+
+    if under_21 == true
+      hands.score_status(hands.players_hand, hands.dealers_hand)
+      # until under_21 != true
+      if player.hit_or_stand == true
+        hands.player_accepts_new_card(@dealer.deal_one_card)
+        hands.score_status(hands.players_hand, hands.dealers_hand)
+        if under_21 == true
+          player.hit_or_stand
+        end
+      else
+        # @player.hit_or_stand == false
         print "
         " + hands.compare_player_to_dealer + "
         "
-      else
-        @dealer.deal_one_card_to_player
+        play_new_hand?
       end
+    elsif under_21 == false
+      print "Your hand is over"
       play_new_hand?
-    else
-      print "Congratulations, you have blackjack!
-      "
-      play_new_hand?
+
+    elsif hands.blackjack?(hands.players_hand) == true
+      hand_is_blackjack
     end
+    # binding.pry
   end
+
+  def hand_is_blackjack
+    print "
+    ****** Congratulations, you have blackjack! ******
+    "
+    # play_new_hand?
+  end
+
 
   def play_new_hand?
     if @player.new_hand == true
-      print "Great!"
-      self.start_game
+      start_new_hand
       # continue_with_hand? this method hasn't yet been written....
     else
-      print "Thanks for playing!
+      print "
+      Thanks for playing!
       "
+      # end_game
     end
   end
 
@@ -53,11 +78,7 @@ class Game
     "
   end
 
-  def continue_with_hand?
-    # I still need to figure out how to incorporate bets and end the game.
-  end
-
   def end_game?
-    false
+    true
   end
 end
