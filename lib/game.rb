@@ -44,7 +44,6 @@ class Game
       hit_or_stand
     else
       hand_ends
-      @player.loose_money
     end
   end
 
@@ -78,14 +77,13 @@ class Game
     space = " " * space_width
     print "\n#{space}** End of hand **#{space}\n\n"
     if @dealer.shuffled_deck.length < 20
-      print "getting new deck"
       @dealer.get_new_deck
     end
     display_money_status
     if @player.new_hand == true
       start_new_hand
     else
-    print "\nThanks for playing!\n"
+    print "\nThanks for playing!\n\n"
     end
   end
 
