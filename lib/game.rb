@@ -20,17 +20,12 @@ class Game
 
   def start_new_hand
     @hands = Hands.new(@dealer)
-    under_21 = @hands.under_21(@hands.players_hand)
-
     if @hands.blackjack?(@hands.players_hand) == true
       hand_is_blackjack
       play_new_hand?
-    elsif under_21 == true
+    else
       @hands.score_status(@hands.players_hand, @hands.dealers_hand)
       hit_or_stand
-    elsif under_21 == false
-      print "Your hand is over"
-      play_new_hand?
     end
   end
 
@@ -47,7 +42,6 @@ class Game
     @hands.score_status(@hands.players_hand, @hands.dealers_hand)
     if @hands.under_21(@hands.players_hand) == true
       hit_or_stand
-          binding.pry
     else
       hand_ends
     end
@@ -71,12 +65,10 @@ class Game
   def play_new_hand?
     if @player.new_hand == true
       start_new_hand
-      # continue_with_hand? this method hasn't yet been written....
     else
-      print "
-      Thanks for playing!
-      "
-      # end_game
+    print "
+    Thanks for playing!
+    "
     end
   end
 
@@ -89,9 +81,5 @@ class Game
     Aces are worth 1 or 11 and will be evaluated in your favor.
 
     "
-  end
-
-  def end_game?
-    true
   end
 end

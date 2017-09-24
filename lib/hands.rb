@@ -19,6 +19,7 @@ class Hands
   end
 
   def hand_to_ranks(hand)
+    # binding.pry
     ranks = []
     hand.each do |card|
       ranks.push card.rank
@@ -62,7 +63,6 @@ class Hands
   def point_evalulator(hand)
     if convert_to_i_and_sum(hand) == 21
       "Congratulations, you have blackjack!"
-      # return false
     elsif convert_to_i_and_sum(hand) < 21
       "Your hand is worth #{ convert_to_i_and_sum(hand) } points."
     elsif convert_to_i_and_sum(hand) > 21
@@ -106,26 +106,33 @@ class Hands
   def score_status(players_hand, dealers_hand)
     # binding.pry
     if players_hand.length == 2 && blackjack?(players_hand) == false
-    print "
-    You have" + show_two_cards(players_hand) + ". " + point_evalulator(players_hand) +
-    "
-    The dealer has one card face down and is showing "  + show_one_card(dealers_hand) + ".
-
-    "
+    print "#{ show_two_cards(@players_hand)}" + point_evalulator(players_hand)
+    print "\nThe dealer has one card face down and is showing " + show_one_card(dealers_hand) + ".\n"
     elsif players_hand.length > 2 && blackjack?(players_hand) == false
-    print "
-    You now have" + show_three_cards(players_hand) + ". " + point_evalulator(players_hand) +     "
-
-    "
+    print "#{ show_more_than_two_cards(@players_hand) }" + point_evalulator(players_hand) + "\n"
     end
   end
 
-  def show_three_cards(hand)
-    " a #{hand[0].rank} of #{hand[0].suit}, a #{hand[1].rank} of #{hand[1].suit}, and a #{hand[2].rank} of #{hand[2].suit}"
+  def show_two_cards(hand)
+    display = []
+    hand.each do |card|
+      display.push " a " + card.rank.to_s + " of " + card.suit.to_s
+    end
+    "You have#{display[0]} and#{display[1]}. "
   end
 
-  def show_two_cards(hand)
-    " a #{hand[0].rank} of #{hand[0].suit} and a #{hand[1].rank} of #{hand[1].suit}"
+  def show_more_than_two_cards(hand)
+    # binding.pry
+    display = []
+    hand.each do |card|
+      display.push " a " + card.rank.to_s + " of " + card.suit.to_s
+    end
+    if display.length == 3
+    "You now have: #{display[0]}, #{display[1]}, and #{display[2]}. "
+    elsif display.length == 4
+      "You now have: #{display[0]}, #{display[1]}, #{display[2]}, and#{display[3]}."
+    end
+    #  a #{hand[0].rank} of #{hand[0].suit}, a #{hand[1].rank} of #{hand[1].suit}, and a #{hand[2].rank} of #{hand[2].suit}"
   end
 
   def show_one_card(hand)
