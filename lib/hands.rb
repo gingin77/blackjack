@@ -78,7 +78,7 @@ class Hands
 
   def compare_player_to_dealer
     if point_evalulator_to_i(@players_hand) > 21
-      "You lose $10 on this hand.\n"
+      "You loose $10 on this hand.\n"
     elsif point_evalulator_to_i(@players_hand) == 21
       "Congratulations, you win $10 on this hand!\n"
     elsif point_evalulator_to_i(@players_hand) < 21 && point_evalulator_to_i(@dealers_hand) > 21
@@ -89,10 +89,10 @@ class Hands
       elsif point_evalulator_to_i(@players_hand) == point_evalulator_to_i(@dealers_hand)
       "You tied the dealer. No money gained or lost.\n"
       elsif point_evalulator_to_i(@players_hand) < point_evalulator_to_i(@dealers_hand)
-      "Your hand lost to the dealer. You lose $10 on this hand.\n"
+      "Your hand lost to the dealer. You loose $10 on this hand.\n"
       end
     elsif point_evalulator_to_i(@players_hand) < 21 && point_evalulator_to_i(@dealers_hand) == 21
-      "The dealer had blackjack. You lose $10 on this hand.\n"
+      "The dealer had blackjack. You loose $10 on this hand.\n"
     end
   end
 
@@ -119,10 +119,10 @@ class Hands
   def score_status(players_hand, dealers_hand)
     # binding.pry
     if players_hand.length == 2 && blackjack?(players_hand) == false
-    print "\n#{ show_two_cards(@players_hand)}" + point_evalulator(players_hand)+ "\n"
-    print "The dealer has one card face down and is showing " + show_one_card(dealers_hand) + ".\n"
+      print "\n#{ show_two_cards(@players_hand)}" + point_evalulator(players_hand) + "\n"
+      print "The dealer has one card face down and is showing" + show_one_card(dealers_hand) + ".\n"
     elsif players_hand.length > 2 && blackjack?(players_hand) == false
-    print "\n#{ show_more_than_two_cards(@players_hand) }" + point_evalulator(players_hand) + "\n"
+      print "\n#{ show_more_than_two_cards(@players_hand) }" + point_evalulator(players_hand)
     end
   end
 

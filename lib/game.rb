@@ -73,6 +73,7 @@ class Game
 
 
   def play_new_hand?
+    print "\n                         ** End of hand **                         \n\n"
     display_money_status
     if @player.new_hand == true
       start_new_hand
@@ -81,13 +82,17 @@ class Game
     end
   end
 
+    # puts Rainbow("this is red").red + " and " + Rainbow("this on yellow bg").bg(:yellow) + " and " + Rainbow("even bright underlined!").underline.bright
+
   def start_display
-    print "\nHello and welcome to the game of blackjack!
+    print Rainbow("\n
+                  Hello and welcome to the game of blackjack!\n").bg(:silver) +
+    "\n
     \nAces are worth 1 or 11 and will be evaluated in your favor.\n"
   end
 
   def display_money_status
-    print "\nYou currently have $#{@player.money} and each hand requires a $#{@player.bet} bet to play."
+    print "\nYou currently have " + Rainbow("$").blue + Rainbow("#{@player.money}").blue + " and each hand requires a " + Rainbow("$").blue + Rainbow("#{@player.bet}").blue + " bet to play.\n"
     # binding.pry
   end
 end

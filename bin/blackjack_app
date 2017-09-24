@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'pry'
+require "rainbow"
 
 # To run this from the blackjack parent directory, use:  ./bin/blackjack_app
 
