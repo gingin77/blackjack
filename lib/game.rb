@@ -48,16 +48,12 @@ class Game
   end
 
   def hand_ends
-    print "
-        " + @hands.compare_player_to_dealer + "
-        "
+    print "\n#{@hands.compare_player_to_dealer}\n"
     play_new_hand?
   end
 
   def hand_is_blackjack
-    print "
-    ****** Congratulations, you have blackjack! ******
-    "
+    print "\n****** Congratulations, you have blackjack! ******\n"
     # play_new_hand?
   end
 
@@ -66,20 +62,13 @@ class Game
     if @player.new_hand == true
       start_new_hand
     else
-    print "
-    Thanks for playing!
-    "
+    print "\nThanks for playing!\n"
     end
   end
 
   def start_display
-    print "
-    Hello and welcome to the game of blackjack!
-
-    Let's begin. You have $100 and you have to bet $10 on each hand.
-
-    Aces are worth 1 or 11 and will be evaluated in your favor.
-
-    "
+    print "\nHello and welcome to the game of blackjack!
+    \nYou have $100 and you have to bet $10 on each hand.
+    \nAces are worth 1 or 11 and will be evaluated in your favor.\n"
   end
 end
