@@ -1,6 +1,7 @@
 require "pry"
 
 class Player
+  attr_accessor :bet, :money
   def initialize
     @bet = 10
     @money = 100
@@ -17,7 +18,6 @@ class Player
       else
       puts "\nThat is not a valid response!"
       end
-      # response
     end
   end
 
@@ -29,17 +29,17 @@ class Player
         return true
       elsif response == "n"
         return false
+      else
+        puts "\nThat is not a valid response!"
       end
-      puts "\nThat is not a valid response!"
-      response
     end
   end
 
-  def lose_bet
-    @money - @bet
+  def loose_money
+    @money = @money - @bet
   end
 
   def add_money
-    @money + @bet
+    @money = @money + @bet
   end
 end

@@ -20,8 +20,10 @@ class Game
 
   def start_new_hand
     @hands = Hands.new(@dealer)
+    display_money_status
     if @hands.blackjack?(@hands.players_hand) == true
       hand_is_blackjack
+      @player.add_money
       play_new_hand?
     else
       @hands.score_status(@hands.players_hand, @hands.dealers_hand)
@@ -44,6 +46,7 @@ class Game
       hit_or_stand
     else
       hand_ends
+      @player.loose_money
     end
   end
 
@@ -54,11 +57,11 @@ class Game
 
   def hand_is_blackjack
     print "\n****** Congratulations, you have blackjack! ******\n"
-    # play_new_hand?
   end
 
 
   def play_new_hand?
+    display_money_status
     if @player.new_hand == true
       start_new_hand
     else
@@ -68,7 +71,11 @@ class Game
 
   def start_display
     print "\nHello and welcome to the game of blackjack!
-    \nYou have $100 and you have to bet $10 on each hand.
     \nAces are worth 1 or 11 and will be evaluated in your favor.\n"
+  end
+
+  def display_money_status
+    print "\nYou currently have $#{@player.money} and each hand requires a $#{@player.bet} bet to play."
+    # binding.pry
   end
 end

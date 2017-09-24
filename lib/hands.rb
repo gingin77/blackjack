@@ -76,8 +76,9 @@ class Hands
   end
 
   def compare_player_to_dealer
+    binding.pry
     if point_evalulator_to_i(@players_hand) > 21
-    "You lose $10 on this hand.\n"
+      "You lose $10 on this hand.\n"
       # In the Game class >> player.lose_bet
     elsif point_evalulator_to_i(@players_hand) == 21
       "Congratulations, you win $10 on this hand!\n"
