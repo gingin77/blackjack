@@ -80,7 +80,8 @@ class Hands
     if point_evalulator_to_i(@players_hand) > 21
       "You loose $10 on this hand.\n"
     elsif point_evalulator_to_i(@players_hand) == 21
-      "Congratulations, you win $10 on this hand!\n"
+      Rainbow("\n
+      *  *  *  *  Congratulations, you have blackjack! *  *  *  *  \n").bg(:springgreen)
     elsif point_evalulator_to_i(@players_hand) < 21 && point_evalulator_to_i(@dealers_hand) > 21
       "The dealer busted, so you win $10 on this hand!\n"
     elsif point_evalulator_to_i(@players_hand) < 21 && point_evalulator_to_i(@dealers_hand) < 21

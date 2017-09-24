@@ -9,6 +9,10 @@ class Dealer
     @shuffled_deck = Deck.new.create_deck
   end
 
+  def get_new_deck
+    @shuffled_deck = Deck.new.create_deck
+  end
+
   def deal_two_cards
     @shuffled_deck.pop(2)
   end
