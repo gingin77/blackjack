@@ -6,11 +6,13 @@ require_relative 'player'
 require 'pry'
 
 class Hands
-  attr_reader :players_hand, :dealers_hand
+  attr_reader :players_hand, :dealers_hand, :hand_wins, :tie
 
   def initialize(dealer)
     @players_hand = dealer.deal_two_cards
     @dealers_hand = dealer.deal_two_cards
+    @hand_wins = false
+    @tie = false
     # score_status(@players_hand, @dealers_hand)
   end
 
@@ -66,7 +68,6 @@ class Hands
     elsif convert_to_i_and_sum(hand) < 21
       "Your hand is worth #{ convert_to_i_and_sum(hand) } points.\n"
     elsif convert_to_i_and_sum(hand) > 21
-      # check_for_aces
       if hand_to_ranks(hand).count(:Ace) >= 1
         "Your hand is worth #{ convert_to_i_and_sum(hand) - 10 } points.\n"
       else
@@ -76,24 +77,42 @@ class Hands
   end
 
   def compare_player_to_dealer
-    binding.pry
     if point_evalulator_to_i(@players_hand) > 21
       "You lose $10 on this hand.\n"
-      # In the Game class >> player.lose_bet
     elsif point_evalulator_to_i(@players_hand) == 21
       "Congratulations, you win $10 on this hand!\n"
     elsif point_evalulator_to_i(@players_hand) < 21 && point_evalulator_to_i(@dealers_hand) > 21
-      "You win $10 on this hand.\n"
+      "The dealer busted, so you win $10 on this hand!\n"
     elsif point_evalulator_to_i(@players_hand) < 21 && point_evalulator_to_i(@dealers_hand) < 21
       if point_evalulator_to_i(@players_hand) > point_evalulator_to_i(@dealers_hand)
       "Your hand beat the dealer's hand, so you win $10 on this hand!\n"
       elsif point_evalulator_to_i(@players_hand) == point_evalulator_to_i(@dealers_hand)
-        "You tied the dealer. No money gained or lost.\n"
+      "You tied the dealer. No money gained or lost.\n"
       elsif point_evalulator_to_i(@players_hand) < point_evalulator_to_i(@dealers_hand)
-        "Your hand lost to the dealer. You lose $10 on this hand.\n"
+      "Your hand lost to the dealer. You lose $10 on this hand.\n"
       end
     elsif point_evalulator_to_i(@players_hand) < 21 && point_evalulator_to_i(@dealers_hand) == 21
       "The dealer had blackjack. You lose $10 on this hand.\n"
+    end
+  end
+
+  def bets_handler
+    if point_evalulator_to_i(@players_hand) > 21
+      @hand_wins = false
+    elsif point_evalulator_to_i(@players_hand) == 21
+      @hand_wins = true
+    elsif point_evalulator_to_i(@players_hand) < 21 && point_evalulator_to_i(@dealers_hand) > 21
+      @hand_wins = true
+    elsif point_evalulator_to_i(@players_hand) < 21 && point_evalulator_to_i(@dealers_hand) < 21
+      if point_evalulator_to_i(@players_hand) > point_evalulator_to_i(@dealers_hand)
+        @hand_wins = true
+      elsif point_evalulator_to_i(@players_hand) == point_evalulator_to_i(@dealers_hand)
+        @tie = true
+      elsif point_evalulator_to_i(@players_hand) < point_evalulator_to_i(@dealers_hand)
+        @hand_wins = false
+      end
+    elsif point_evalulator_to_i(@players_hand) < 21 && point_evalulator_to_i(@dealers_hand) == 21
+      @hand_wins = false
     end
   end
 
@@ -125,8 +144,11 @@ class Hands
     "You now have: #{display[0]}, #{display[1]}, and #{display[2]}. "
     elsif display.length == 4
     "You now have: #{display[0]}, #{display[1]}, #{display[2]}, and#{display[3]}."
+    elsif display.length == 5
+    "You now have: #{display[0]}, #{display[1]}, #{display[2]}, #{display[3]}, and#{display[4]}."
+      #   end
+      # end
     end
-    #  a #{hand[0].rank} of #{hand[0].suit}, a #{hand[1].rank} of #{hand[1].suit}, and a #{hand[2].rank} of #{hand[2].suit}"
   end
 
   def show_one_card(hand)

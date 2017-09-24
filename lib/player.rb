@@ -36,10 +36,10 @@ class Player
   end
 
   def loose_money
-    @money = @money - @bet
+    @money - @bet
   end
 
   def add_money
-    @money = @money + @bet
+    @money + @bet
   end
 end

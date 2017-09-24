@@ -52,7 +52,19 @@ class Game
 
   def hand_ends
     print "\n#{@hands.compare_player_to_dealer}\n"
+    calculate_bets
     play_new_hand?
+  end
+
+  def calculate_bets
+    @hands.bets_handler
+    if @hands.tie == false && @hands.hand_wins == true
+      @player.money = @player.add_money
+    elsif @hands.tie == false && @hands.hand_wins == false
+      @player.money = @player.loose_money
+    elsif @hands.tie == true
+      @player.money = @player.money
+    end
   end
 
   def hand_is_blackjack
