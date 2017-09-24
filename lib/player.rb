@@ -1,6 +1,7 @@
 require "pry"
 
 class Player
+  attr_accessor :bet, :money
   def initialize
     @bet = 10
     @money = 100
@@ -8,34 +9,33 @@ class Player
 
   def hit_or_stand
     while true
-      print "Do you want to hit or stand? Enter (h) or (s).  "
+      print "\nDo you want to hit or stand? Enter (h) or (s).  "
       response = gets.chomp.downcase
       if response == "h"
         return true
       elsif response == "s"
         return false
       else
-      puts "That is not a valid response!"
+      puts "\nThat is not a valid response!"
       end
-      # response
     end
   end
 
   def new_hand
     while true
-      print "Do you want to play another hand? Enter (y) or (n).  "
+      print "\nDo you want to play another hand? Enter (y) or (n).  "
       response = gets.chomp.downcase
       if response == "y"
         return true
       elsif response == "n"
         return false
+      else
+        puts "\nThat is not a valid response!"
       end
-      puts "That is not a valid response!"
-      response
     end
   end
 
-  def lose_bet
+  def loose_money
     @money - @bet
   end
 

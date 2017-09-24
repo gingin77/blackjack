@@ -18,31 +18,6 @@ class Game
   end
 
   def start_new_hand
-    hands = Hands.new(@dealer)
-    under_21 = hands.under_21(hands.players_hand)
-
-    if under_21 == true
-      hands.score_status(hands.players_hand, hands.dealers_hand)
-      # until under_21 != true
-      if player.hit_or_stand == true
-        hands.player_accepts_new_card(@dealer.deal_one_card)
-        hands.score_status(hands.players_hand, hands.dealers_hand)
-        if under_21 == true
-          player.hit_or_stand
-        end
-      else
-        # @player.hit_or_stand == false
-        print "
-        " + hands.compare_player_to_dealer + "
-        "
-        play_new_hand?
-      end
-    elsif under_21 == false
-      print "Your hand is over"
-      play_new_hand?
-
-    elsif hands.blackjack?(hands.players_hand) == true
-      hand_is_blackjack
     end
     # binding.pry
   end
@@ -54,31 +29,58 @@ class Game
     # play_new_hand?
   end
 
-
-  def play_new_hand?
-    if @player.new_hand == true
-      start_new_hand
-      # continue_with_hand? this method hasn't yet been written....
-    else
-      print "
-      Thanks for playing!
-      "
-      # end_game
     end
   end
 
-  def start_display
-    print "
-    Hello and welcome to the game of blackjack!
-
-    Let's begin. You have $100 and you have to bet $10 on each hand.
-
-    Aces are worth 1 or 11 and will be evaluated in your favor.
-
-    "
+  def handle_hit
+    @hands.player_accepts_new_card(@dealer.deal_one_card)
+    @hands.score_status(@hands.players_hand, @hands.dealers_hand)
+    if @hands.under_21(@hands.players_hand) == true
+      hit_or_stand
+    else
+      hand_ends
+    end
   end
 
-  def end_game?
-    true
+  def hand_ends
+    print "\n#{@hands.compare_player_to_dealer}\n"
+    calculate_bets
+    play_new_hand?
+  end
+
+  def calculate_bets
+    @hands.bets_handler
+    if @hands.tie == false && @hands.hand_wins == true
+      @player.money = @player.add_money
+    elsif @hands.tie == false && @hands.hand_wins == false
+      @player.money = @player.loose_money
+    elsif @hands.tie == true
+      @player.money = @player.money
+    end
+  end
+
+  def hand_is_blackjack
+    print Rainbow("\n
+    *  *  *  *  Congratulations, you have blackjack! *  *  *  *  \n").bg(:springgreen)
+    calculate_bets
+    play_new_hand?
+  end
+
+
+  def play_new_hand?
+    space_width = 20
+    space = " " * space_width
+    print "\n#{space}** End of hand **#{space}\n\n"
+    if @dealer.shuffled_deck.length < 20
+      @dealer.get_new_deck
+    end
+    display_money_status
+    if @player.new_hand == true
+      start_new_hand
+    else
+    print "\nThanks for playing!\n\n"
+    end
+  end
+
   end
 end

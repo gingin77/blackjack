@@ -4,12 +4,13 @@ require 'pry'
 
 class Dealer
   attr_accessor :shuffled_deck
-  # , :two_to_player, :two_to_dealer
 
   def initialize
     @shuffled_deck = Deck.new.create_deck
-    # @two_to_player = deal_two_cards
-    # @two_to_dealer = deal_two_cards
+  end
+
+  def get_new_deck
+    @shuffled_deck = Deck.new.create_deck
   end
 
   def deal_two_cards
@@ -19,13 +20,4 @@ class Dealer
   def deal_one_card
     @shuffled_deck.pop(1)
   end
-
-  # def puts_hands
-  #   puts @shuffled_deck[-2..51]
-  #   puts "^^ shuffled_deck"
-  #   puts @players_hand
-  #   puts "/n ^^players_hand"
-  #   puts @dealers_hand
-  #   puts "/n ^^dealers_hand"
-  # end
 end
