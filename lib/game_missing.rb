@@ -9,7 +9,6 @@ class Game
   def initialize
     @dealer = Dealer.new
     @player = Player.new
-    @hands = Hands.new(@dealer)
     start_new_game
   end
 
@@ -19,21 +18,17 @@ class Game
   end
 
   def start_new_hand
-    @hands = Hands.new(@dealer)
-    display_money_status
-    if @hands.blackjack?(@hands.players_hand) == true
-      hand_is_blackjack
-    else
-      @hands.score_status(@hands.players_hand, @hands.dealers_hand)
-      hit_or_stand
     end
+    # binding.pry
   end
 
-  def hit_or_stand
-    if player.hit_or_stand == true
-      handle_hit
-    else
-      hand_ends
+  def hand_is_blackjack
+    print "
+    ****** Congratulations, you have blackjack! ******
+    "
+    # play_new_hand?
+  end
+
     end
   end
 
@@ -44,7 +39,6 @@ class Game
       hit_or_stand
     else
       hand_ends
-      @player.loose_money
     end
   end
 
@@ -78,27 +72,15 @@ class Game
     space = " " * space_width
     print "\n#{space}** End of hand **#{space}\n\n"
     if @dealer.shuffled_deck.length < 20
-      print "getting new deck"
       @dealer.get_new_deck
     end
     display_money_status
     if @player.new_hand == true
       start_new_hand
     else
-    print "\nThanks for playing!\n"
+    print "\nThanks for playing!\n\n"
     end
   end
 
-  def start_display
-    space_width = 20
-    space = " " * space_width
-    print Rainbow("\n\n#{space}Hello and welcome to the game of blackjack!#{space}\n").bg(:silver) +
-    "\n
-    \nThere is one deck in the shoe and the dealer will shuffle when cards start to get low.
-    \nAces are worth 1 or 11 and will be evaluated in your favor.\n"
-  end
-
-  def display_money_status
-    print "\nYou currently have " + Rainbow("$").blue + Rainbow("#{@player.money}").blue + " and each hand requires a " + Rainbow("$").blue + Rainbow("#{@player.bet}").blue + " bet to play.\n"
   end
 end
