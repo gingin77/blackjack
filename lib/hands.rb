@@ -13,7 +13,6 @@ class Hands
     @dealers_hand = dealer.deal_two_cards
     @hand_wins = false
     @tie = false
-    # score_status(@players_hand, @dealers_hand)
   end
 
   def player_accepts_new_card(card)
@@ -21,7 +20,6 @@ class Hands
   end
 
   def hand_to_ranks(hand)
-    # binding.pry
     ranks = []
     hand.each do |card|
       ranks.push card.rank
@@ -147,8 +145,6 @@ class Hands
     "You now have: #{display[0]}, #{display[1]}, #{display[2]}, and#{display[3]}."
     elsif display.length == 5
     "You now have: #{display[0]}, #{display[1]}, #{display[2]}, #{display[3]}, and#{display[4]}."
-      #   end
-      # end
     end
   end
 
